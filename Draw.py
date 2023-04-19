@@ -114,7 +114,7 @@ while running:
             if frame_counter == 3 and image_swap == 0:
                 if systems_dictionary["movement_dictionary"]["move_right"] == True:
                     systems_dictionary["movement_dictionary"]["mario_object"].image = systems_dictionary["misc_dictionary"]["mario_walking1"]
-                    systems_dictionary["movement_dictionary"]["mario_object"].image = systems_dictionary["movement_dictionary"]["last_image"]
+                    systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image 
                     frame_counter = 0
                     systems_dictionary["movement_dictionary"]["image_swap"] = 1
                     
@@ -129,11 +129,12 @@ while running:
             if frame_counter == 3 and image_swap == 1:
                 if systems_dictionary["movement_dictionary"]["move_right"] == True:
                     systems_dictionary["movement_dictionary"]["mario_object"].image = systems_dictionary["misc_dictionary"]["mario_walking2"]
-                    systems_dictionary["movement_dictionary"]["mario_object"].image = systems_dictionary["movement_dictionary"]["last_image"]
+                    systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image
                     mario_object.x += 15
                     frame_counter = 0
                     systems_dictionary["movement_dictionary"]["image_swap"] = 2
                     systems_dictionary["movement_dictionary"]["move_right"] = False
+                    
 
                 #if systems_dictionary["movement_dictionary"]["move_left"] == True:
                     #systems_dictionary["movement_dictionary"]["mario_object"].image = pygame.transform.flip(systems_dictionary["misc_dictionary"]["mario_walking2"], True, False)
@@ -147,7 +148,7 @@ while running:
             if frame_counter == 3 and image_swap == 2:
                 if systems_dictionary["movement_dictionary"]["move_right"] == True:
                     systems_dictionary["movement_dictionary"]["mario_object"].image = systems_dictionary["misc_dictionary"]["mario_walking3"]
-                    systems_dictionary["movement_dictionary"]["mario_object"].image = systems_dictionary["movement_dictionary"]["last_image"]
+                    systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image
                     mario_object.x += 15
                     frame_counter = 0
                     systems_dictionary["movement_dictionary"]["image_swap"] = 0
