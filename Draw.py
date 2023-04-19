@@ -117,7 +117,7 @@ while running:
                     systems_dictionary["movement_dictionary"]["mario_object"].image = systems_dictionary["movement_dictionary"]["last_image"]
                     frame_counter = 0
                     systems_dictionary["movement_dictionary"]["image_swap"] = 1
-                    print ("current image is " + str(systems_dictionary["movement_dictionary"]["image_swap"]))
+                    
                     
                 # if systems_dictionary["movement_dictionary"]["move_left"] == True:
                 #     systems_dictionary["movement_dictionary"]["mario_object"].image = pygame.transform.flip(systems_dictionary["misc_dictionary"]["mario_walking1"], True, False)
