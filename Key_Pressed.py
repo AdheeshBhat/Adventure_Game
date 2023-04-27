@@ -19,17 +19,14 @@ def mario_jump(systems_dictionary):
 
     if jump_frame_counter <= MAX_UP and systems_dictionary["movement_dictionary"]["space"] == True:
         systems_dictionary["movement_dictionary"]["mario_object"].y -= 30
+        systems_dictionary["movement_dictionary"]["jump"] = True
 
     elif MAX_DOWN >= jump_frame_counter > MAX_UP:
         systems_dictionary["movement_dictionary"]["mario_object"].y += 30
-    
+        systems_dictionary["movement_dictionary"]["jump"] = False
 
     else:
-        #if systems_dictionary["movement_dictionary"]["move_left"] == True:
-            #systems_dictionary["movement_dictionary"]["mario_object"].image = pygame.transform.flip(systems_dictionary["movement_dictionary"]["last_image"], True, False)
-        
-        if systems_dictionary["movement_dictionary"]["move_right"] == True:
-            systems_dictionary["movement_dictionary"]["mario_object"].image = systems_dictionary["movement_dictionary"]["last_image"]
+        systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image# = systems_dictionary["movement_dictionary"]["last_image"]
         
         systems_dictionary["movement_dictionary"]["space"] = False
         systems_dictionary["movement_dictionary"]["jump_frame_counter"] = 0
@@ -42,7 +39,7 @@ def key_Pressed(event, systems_dictionary):
         systems_dictionary["volume_dictionary"]["sound"] = True
         systems_dictionary["movement_dictionary"]["time_since_last_jumped"] = pygame.time.get_ticks()
         systems_dictionary["movement_dictionary"]["space"] = True
-        mario_object.image = systems_dictionary["misc_dictionary"]["mario_jump_image"]
+        mario_object.image = pygame.transform.flip(systems_dictionary["misc_dictionary"]["mario_jump_image"], True, False)
             
     if keyboard.is_pressed("d"):
         systems_dictionary["movement_dictionary"]["move_right"] = True
@@ -52,8 +49,8 @@ def key_Pressed(event, systems_dictionary):
 
     if event.type == pygame.MOUSEBUTTONDOWN:
         x,y = pygame.mouse.get_pos()
-        print ("x is " + str(x))
-        print ("y is " + str(y))
+        #print ("x is " + str(x))
+        #print ("y is " + str(y))
 
         #get to game_screen
         if 650 <= x <= 838 and 150 <= y <= 237 and systems_dictionary["screen_dictionary"]["current_screen"] == systems_dictionary["screen_dictionary"]["main_menu"]:
