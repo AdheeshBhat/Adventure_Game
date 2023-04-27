@@ -1,10 +1,10 @@
 import pygame
-import Movement
+import Mario_Movement
 import Key_Pressed
 import colors
-import time
 pygame.init()
 pygame.mixer.init()
+import Screens
 
 clock = pygame.time.Clock()
 
@@ -22,9 +22,9 @@ mario_walking3 = pygame.transform.smoothscale(mario_walking3, (200,200))
 mario_jump_image = pygame.image.load("mario_jump_image.png")
 mario_jump_image = pygame.transform.smoothscale(mario_jump_image, (200,200))
 background_music = pygame.mixer.music.load("background_music.mp3")
-mario_background_image = pygame.image.load("mario_background_image.png")
-mario_jump_sound = pygame.mixer.Sound("mario_jump_sound.mp3")
-mario_background_image = pygame.transform.smoothscale(mario_background_image, (info_object.current_w - 5, info_object.current_h - 50))
+
+
+
 pygame.mixer.music.set_volume(adjust_volume)
 
 class mario:
@@ -48,8 +48,6 @@ volume_percentage = 100
 mario_current_image = mario_walking1
 mario_switch_image = False
 current_time = 0
-frame_counter = 0
-mario_speed = 20
 mario_object = mario()
 
 #dictionary for all screens and volume
@@ -63,7 +61,7 @@ systems_dictionary = {"screen_dictionary": {"current_screen": 0, "game_screen": 
                                             "time_since_last_jumped": -2000, "mario_object": mario_object,
                                             "current_frame": 0, "move_right": False, "image_swap": 0,
                                             "last_image": mario_walking1, "jump_frame_counter": 0,
-                                            "move_left": False},
+                                            "move_left": False, "frame_counter": 0, "mario_speed": 20},
                                         "misc_dictionary": {"mario_jump_image": mario_jump_image,
                                             "mario_walking1": mario_walking1, "mario_walking2": mario_walking2,
                                             "mario_walking3": mario_walking3}}
@@ -82,159 +80,6 @@ while running:
         else:
             systems_dictionary = Key_Pressed.key_Pressed(event, systems_dictionary)
 
-    #dictionary variables
-    current_screen = systems_dictionary["screen_dictionary"]["game_screen"]
-    main_menu = systems_dictionary["screen_dictionary"]["main_menu"]
-    game_screen = systems_dictionary["screen_dictionary"]["game_screen"]
-    settings_screen = systems_dictionary["screen_dictionary"]["settings_screen"]
-    control_screen = systems_dictionary["screen_dictionary"]["control_screen"]
-    image_swap = systems_dictionary["movement_dictionary"]["image_swap"]
-    move_left = systems_dictionary["movement_dictionary"]["move_left"]
-    move_right = systems_dictionary["movement_dictionary"]["move_right"]
-
-    #main menu screen
-    if current_screen == main_menu:
-        screen.fill(colors.blue)
-        text = font.render("Start", True, (0,0,0), colors.green)
-        screen.blit(text, (650,150))
-        text2 = font.render("Settings", True, (0,0,0), colors.green)
-        screen.blit(text2, (600, 350))
-        text3 = font.render("Controls", True, (0,0,0), colors.green)
-        screen.blit(text3, (600, 550))
-
-    #game screen
-    if current_screen == game_screen:
-        screen.fill(colors.blue)
-        screen.blit(mario_background_image, (0,0))
-        text4 = font1.render("Return to Menu", True, (0,0,0), colors.green)
-        screen.blit(text4, (25,25))    
-        screen.blit(systems_dictionary["movement_dictionary"]["mario_object"].image, (mario_object.x, mario_object.y))
-        
-        #plays jump sound effect
-        if systems_dictionary["volume_dictionary"]["sound"] == True:
-            mario_jump_sound.play()
-            systems_dictionary["volume_dictionary"]["sound"] = False
-
-        #if character is moving right or left
-        if move_right == True or move_left == True:
-            #check if it has been three frames yet
-            if frame_counter == 3 and image_swap == 0:
-                #while moving right
-                if move_right == True:
-                    #checks if character is jumping in order to prevent an image switch
-                    if not systems_dictionary["movement_dictionary"]["space"]:
-                        systems_dictionary["movement_dictionary"]["mario_object"].image = systems_dictionary["misc_dictionary"]["mario_walking1"]
-                    #displays image 1 (right)
-                    systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image 
-                    frame_counter = 0
-                    systems_dictionary["movement_dictionary"]["image_swap"] = 1
-                    systems_dictionary["movement_dictionary"]["move_right"] = False
-                    
-                #while moving left
-                if move_left == True:
-                    #checks if character is jumping in order to prevent an image switch
-                    if not systems_dictionary["movement_dictionary"]["space"]:
-                        systems_dictionary["movement_dictionary"]["mario_object"].image = pygame.transform.flip(systems_dictionary["misc_dictionary"]["mario_walking1"], True, False)
-                    #displays image 1 (left)
-                    systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image
-                    frame_counter = 0
-                    systems_dictionary["movement_dictionary"]["image_swap"] = 1
-                    systems_dictionary["movement_dictionary"]["move_left"] = False
-
-        #if character is moving right or left
-        if move_right == True or move_left == True:
-            #check if it has been three frames and 1 image switch yet
-            if frame_counter == 3 and image_swap == 1:
-                #while moving right
-                if move_right == True:
-                    #checks if character is jumping in order to prevent an image switch
-                    if not systems_dictionary["movement_dictionary"]["space"]:
-                        systems_dictionary["movement_dictionary"]["mario_object"].image = systems_dictionary["misc_dictionary"]["mario_walking2"]
-                    #displays image 2 (right)
-                    systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image
-                    mario_object.x += mario_speed
-                    frame_counter = 0
-                    systems_dictionary["movement_dictionary"]["image_swap"] = 2
-                    systems_dictionary["movement_dictionary"]["move_right"] = False
-                    
-                #while moving left
-                if move_left == True:
-                    #checks if character is jumping in order to prevent an image switch
-                    if not systems_dictionary["movement_dictionary"]["space"]:
-                        systems_dictionary["movement_dictionary"]["mario_object"].image = pygame.transform.flip(systems_dictionary["misc_dictionary"]["mario_walking2"], True, False)
-                    #displays image 2 (left)
-                    systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image
-                    mario_object.x -= mario_speed
-
-                    frame_counter = 0
-                    systems_dictionary["movement_dictionary"]["image_swap"] = 2
-                    systems_dictionary["movement_dictionary"]["move_left"] = False
-
-        #if character is moving right or left
-        if move_right == True or move_left == True:
-            #check if it has been three frames and 2 image switches yet
-            if frame_counter == 3 and image_swap == 2:
-                #while moving right
-                if move_right == True:
-                    #checks if character is jumping in order to prevent an image switch
-                    if not systems_dictionary["movement_dictionary"]["space"]:
-                        systems_dictionary["movement_dictionary"]["mario_object"].image = systems_dictionary["misc_dictionary"]["mario_walking3"]
-                    #displays image 3 (right)
-                    systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image
-                    mario_object.x += mario_speed
-                    frame_counter = 0
-                    systems_dictionary["movement_dictionary"]["image_swap"] = 0
-                    systems_dictionary["movement_dictionary"]["move_right"] = False
-                
-                #while moving left
-                if move_left == True:
-                    #checks if character is jumping in order to prevent an image switch
-                    if not systems_dictionary["movement_dictionary"]["space"]:
-                        systems_dictionary["movement_dictionary"]["mario_object"].image = pygame.transform.flip(systems_dictionary["misc_dictionary"]["mario_walking3"], True, False)
-                    #displays image 3 (left)
-                    systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image
-                    mario_object.x -= mario_speed
-                    frame_counter = 0
-                    systems_dictionary["movement_dictionary"]["image_swap"] = 0
-                    systems_dictionary["movement_dictionary"]["move_left"] = False
-
-        #makes sure it has been 3 frames before images start switching
-        if frame_counter != 3:
-            frame_counter += 1
-        
-        #counts and adds jump frames when character jumps
-        if systems_dictionary["movement_dictionary"]["space"] == True:
-            if systems_dictionary["movement_dictionary"]["jump_frame_counter"] != 50:
-                systems_dictionary["movement_dictionary"]["jump_frame_counter"] += 1
-
-        systems_dictionary = Key_Pressed.mario_jump(systems_dictionary)
-
-
-    #settings screen
-    if current_screen == settings_screen:
-        screen.fill(colors.green)
-        text5 = font1.render("Return to Menu", True, (0,0,0), colors.green)
-        screen.blit(text5, (25,25))
-        text7 = font.render("Volume", True, (0,0,0), colors.blue)
-        screen.blit(text7, (620,200))
-        #if the volume button is clicked
-        if systems_dictionary["volume_dictionary"]["volume"] == True:
-            text8 = font1.render("Higher", True, (0,0,0), colors.blue)
-            text9 = font1.render("Lower", True, (0,0,0), colors.blue)
-            screen.blit(text8, (480,300))
-            screen.blit(text9, (880,300))
-            text10 = font1.render(str(systems_dictionary["volume_dictionary"]["volume_percentage"]) + "%", True, (0,0,0), colors.blue)
-            screen.blit(text10, (700,300))
-
-        #if the higher or lower buttons are clicked
-        if systems_dictionary["volume_dictionary"]["volume_adjusted"]:
-            pygame.mixer.music.set_volume(systems_dictionary["volume_dictionary"]["adjust_volume"])
-            systems_dictionary["volume_dictionary"]["volume_adjusted"] = False
-            
-    #control screen
-    if current_screen == control_screen:
-        screen.fill(colors.red)
-        text6 = font1.render("Return to Menu", True, (0,0,0), colors.green)
-        screen.blit(text6, (25,25))
+    systems_dictionary, screen, mario_object = Screens.screens(systems_dictionary, screen, mario_object)
 
     pygame.display.flip()
