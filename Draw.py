@@ -122,7 +122,7 @@ while running:
                 #while moving right
                 if move_right == True:
                     #checks if character is jumping in order to prevent an image switch
-                    if not systems_dictionary["movement_dictionary"]["jump"]:
+                    if not systems_dictionary["movement_dictionary"]["space"]:
                         systems_dictionary["movement_dictionary"]["mario_object"].image = systems_dictionary["misc_dictionary"]["mario_walking1"]
                     #displays image 1 (right)
                     systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image 
@@ -133,7 +133,7 @@ while running:
                 #while moving left
                 if move_left == True:
                     #checks if character is jumping in order to prevent an image switch
-                    if not systems_dictionary["movement_dictionary"]["jump"]:
+                    if not systems_dictionary["movement_dictionary"]["space"]:
                         systems_dictionary["movement_dictionary"]["mario_object"].image = pygame.transform.flip(systems_dictionary["misc_dictionary"]["mario_walking1"], True, False)
                     #displays image 1 (left)
                     systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image
@@ -148,7 +148,7 @@ while running:
                 #while moving right
                 if move_right == True:
                     #checks if character is jumping in order to prevent an image switch
-                    if not systems_dictionary["movement_dictionary"]["jump"]:
+                    if not systems_dictionary["movement_dictionary"]["space"]:
                         systems_dictionary["movement_dictionary"]["mario_object"].image = systems_dictionary["misc_dictionary"]["mario_walking2"]
                     #displays image 2 (right)
                     systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image
@@ -160,7 +160,7 @@ while running:
                 #while moving left
                 if move_left == True:
                     #checks if character is jumping in order to prevent an image switch
-                    if not systems_dictionary["movement_dictionary"]["jump"]:
+                    if not systems_dictionary["movement_dictionary"]["space"]:
                         systems_dictionary["movement_dictionary"]["mario_object"].image = pygame.transform.flip(systems_dictionary["misc_dictionary"]["mario_walking2"], True, False)
                     #displays image 2 (left)
                     systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image
@@ -177,7 +177,7 @@ while running:
                 #while moving right
                 if move_right == True:
                     #checks if character is jumping in order to prevent an image switch
-                    if not systems_dictionary["movement_dictionary"]["jump"]:
+                    if not systems_dictionary["movement_dictionary"]["space"]:
                         systems_dictionary["movement_dictionary"]["mario_object"].image = systems_dictionary["misc_dictionary"]["mario_walking3"]
                     #displays image 3 (right)
                     systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image
@@ -189,7 +189,7 @@ while running:
                 #while moving left
                 if move_left == True:
                     #checks if character is jumping in order to prevent an image switch
-                    if not systems_dictionary["movement_dictionary"]["jump"]:
+                    if not systems_dictionary["movement_dictionary"]["space"]:
                         systems_dictionary["movement_dictionary"]["mario_object"].image = pygame.transform.flip(systems_dictionary["misc_dictionary"]["mario_walking3"], True, False)
                     #displays image 3 (left)
                     systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image

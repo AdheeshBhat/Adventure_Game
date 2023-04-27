@@ -26,10 +26,11 @@ def mario_jump(systems_dictionary):
         systems_dictionary["movement_dictionary"]["jump"] = False
 
     else:
-        systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image# = systems_dictionary["movement_dictionary"]["last_image"]
-        
+        if systems_dictionary["movement_dictionary"]["space"] == True:
+            systems_dictionary["movement_dictionary"]["mario_object"].image = systems_dictionary["misc_dictionary"]["mario_walking1"]
         systems_dictionary["movement_dictionary"]["space"] = False
         systems_dictionary["movement_dictionary"]["jump_frame_counter"] = 0
+
 
     return systems_dictionary
 
@@ -39,7 +40,10 @@ def key_Pressed(event, systems_dictionary):
         systems_dictionary["volume_dictionary"]["sound"] = True
         systems_dictionary["movement_dictionary"]["time_since_last_jumped"] = pygame.time.get_ticks()
         systems_dictionary["movement_dictionary"]["space"] = True
-        mario_object.image = pygame.transform.flip(systems_dictionary["misc_dictionary"]["mario_jump_image"], True, False)
+        if systems_dictionary["movement_dictionary"]["move_left"] == True:
+            mario_object.image = pygame.transform.flip(systems_dictionary["misc_dictionary"]["mario_jump_image"], True, False)
+        else:
+            mario_object.image = systems_dictionary["misc_dictionary"]["mario_jump_image"]
             
     if keyboard.is_pressed("d"):
         systems_dictionary["movement_dictionary"]["move_right"] = True
