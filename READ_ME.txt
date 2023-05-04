@@ -7,3 +7,4 @@ each character has their own abilities
 pygame.transform.flip(img,x,y)
 characters can jump onto platforms to fight
 https://ytmp3.nu/4 - link for audio converter
+https://www.spriters-resource.com/fullview/85804/ - link for bowser sprite images

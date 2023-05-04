@@ -34,9 +34,9 @@ def mario_jump(systems_dictionary):
 
     return systems_dictionary
 
-def key_Pressed(event, systems_dictionary):
+def key_Pressed(event, systems_dictionary, bowser_systems_dictionary):
     mario_object = systems_dictionary["movement_dictionary"]["mario_object"]
-    if keyboard.is_pressed("space") and systems_dictionary["movement_dictionary"]["space"] == False:
+    if keyboard.is_pressed("w") and systems_dictionary["movement_dictionary"]["space"] == False:
         systems_dictionary["volume_dictionary"]["sound"] = True
         systems_dictionary["movement_dictionary"]["time_since_last_jumped"] = pygame.time.get_ticks()
         systems_dictionary["movement_dictionary"]["space"] = True
@@ -50,6 +50,18 @@ def key_Pressed(event, systems_dictionary):
 
     if keyboard.is_pressed("a"):
         systems_dictionary["movement_dictionary"]["move_left"] = True
+
+    if keyboard.is_pressed("right arrow"):
+        systems_dictionary["movement_dictionary"]["bowser_move_right"] = True
+        print ("right" + (bowser_systems_dictionary["movement_dictionary"]["bowser_object"].x), str(bowser_systems_dictionary["movement_dictionary"]["bowser_object"].y))
+
+    if keyboard.is_pressed("left arrow"):
+        systems_dictionary["movement_dictionary"]["bowser_move_left"] = True
+        print ("left" + (bowser_systems_dictionary["movement_dictionary"]["bowser_object"].x), str(bowser_systems_dictionary["movement_dictionary"]["bowser_object"].y))
+
+    if keyboard.is_pressed("up arrow") and bowser_systems_dictionary["movement_dictionary"]["space"] == False:
+        print ("up")
+
 
     if event.type == pygame.MOUSEBUTTONDOWN:
         x,y = pygame.mouse.get_pos()
@@ -97,4 +109,4 @@ def key_Pressed(event, systems_dictionary):
                 systems_dictionary["volume_dictionary"]["volume_adjusted"] = True
 
 
-    return systems_dictionary
+    return systems_dictionary, bowser_systems_dictionary

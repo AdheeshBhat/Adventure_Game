@@ -2,6 +2,7 @@ import pygame
 import colors
 import Mario_Movement
 import Key_Pressed
+import Bowser_Movement
 
 info_object = pygame.display.Info()
 mario_background_image = pygame.image.load("mario_background_image.png")
@@ -10,7 +11,7 @@ font = pygame.font.Font('Monsterrat.ttf', 70)
 font1 = pygame.font.Font('Monsterrat.ttf', 50)
 mario_jump_sound = pygame.mixer.Sound("mario_jump_sound.mp3")
 
-def screens(systems_dictionary, screen, mario_object):
+def screens(systems_dictionary, screen, mario_object, bowser_systems_dictionary):
 
     current_screen = systems_dictionary["screen_dictionary"]["game_screen"]
     main_menu = systems_dictionary["screen_dictionary"]["main_menu"]
@@ -35,6 +36,7 @@ def screens(systems_dictionary, screen, mario_object):
         text4 = font1.render("Return to Menu", True, (0,0,0), colors.green)
         screen.blit(text4, (25,25))    
         screen.blit(systems_dictionary["movement_dictionary"]["mario_object"].image, (mario_object.x, mario_object.y))
+        screen.blit(bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image, (bowser_systems_dictionary["movement_dictionary"]["bowser_object"].x, bowser_systems_dictionary["movement_dictionary"]["bowser_object"].y))
         
         #plays jump sound effect
         if systems_dictionary["volume_dictionary"]["sound"] == True:
@@ -42,6 +44,7 @@ def screens(systems_dictionary, screen, mario_object):
             systems_dictionary["volume_dictionary"]["sound"] = False
 
         systems_dictionary, mario_object = Mario_Movement.movement(systems_dictionary, mario_object)
+        systems_dictionary, bowser_systems_dictionary = Bowser_Movement.bowser_movement(systems_dictionary, bowser_systems_dictionary)
         systems_dictionary = Key_Pressed.mario_jump(systems_dictionary)
 
 
@@ -72,4 +75,4 @@ def screens(systems_dictionary, screen, mario_object):
         text6 = font1.render("Return to Menu", True, (0,0,0), colors.green)
         screen.blit(text6, (25,25))
 
-    return systems_dictionary, screen, mario_object
+    return systems_dictionary, screen, mario_object, bowser_systems_dictionary
