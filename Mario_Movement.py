@@ -18,6 +18,7 @@ def movement(systems_dictionary, mario_object):
                     systems_dictionary["movement_dictionary"]["mario_object"].image = systems_dictionary["misc_dictionary"]["mario_walking1"]
                 #displays image 1 (right)
                 systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image 
+                mario_object.x += systems_dictionary["movement_dictionary"]["mario_speed"]
                 systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 systems_dictionary["movement_dictionary"]["image_swap"] = 1
                 systems_dictionary["movement_dictionary"]["move_right"] = False
@@ -29,6 +30,7 @@ def movement(systems_dictionary, mario_object):
                     systems_dictionary["movement_dictionary"]["mario_object"].image = pygame.transform.flip(systems_dictionary["misc_dictionary"]["mario_walking1"], True, False)
                 #displays image 1 (left)
                 systems_dictionary["movement_dictionary"]["last_image"] = systems_dictionary["movement_dictionary"]["mario_object"].image
+                mario_object.x -= systems_dictionary["movement_dictionary"]["mario_speed"]
                 systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 systems_dictionary["movement_dictionary"]["image_swap"] = 1
                 systems_dictionary["movement_dictionary"]["move_left"] = False

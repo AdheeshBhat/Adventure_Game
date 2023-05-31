@@ -8,14 +8,11 @@ added = 0
 subtracted = 0
 MAX_UP = 15
 MAX_DOWN = 30
+Bowser_MAX_UP = 10
+Bowser_MAX_DOWN = 20
 
 def mario_jump(systems_dictionary):
     jump_frame_counter = systems_dictionary["movement_dictionary"]["jump_frame_counter"]
-    if keyboard.is_pressed("d"):
-        systems_dictionary["movement_dictionary"]["move_right"] = True
-    
-    if keyboard.is_pressed("a"):
-        systems_dictionary["movement_dictionary"]["move_left"] = True
 
     if jump_frame_counter <= MAX_UP and systems_dictionary["movement_dictionary"]["space"] == True:
         systems_dictionary["movement_dictionary"]["mario_object"].y -= 30
@@ -34,79 +31,61 @@ def mario_jump(systems_dictionary):
 
     return systems_dictionary
 
-def key_Pressed(event, systems_dictionary, bowser_systems_dictionary):
+def bowser_jump(bowser_systems_dictionary):
+    jump_frame_counter = bowser_systems_dictionary["movement_dictionary"]["jump_frame_counter"]
+
+    if jump_frame_counter <= Bowser_MAX_UP and bowser_systems_dictionary["movement_dictionary"]["space"] == True:
+        bowser_systems_dictionary["movement_dictionary"]["bowser_object"].y -= 30
+        bowser_systems_dictionary["movement_dictionary"]["jump"] = True
+
+    elif Bowser_MAX_DOWN >= jump_frame_counter > Bowser_MAX_UP:
+        bowser_systems_dictionary["movement_dictionary"]["bowser_object"].y += 30
+        bowser_systems_dictionary["movement_dictionary"]["jump"] = False
+
+    else:
+        if bowser_systems_dictionary["movement_dictionary"]["space"] == True:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        bowser_systems_dictionary["movement_dictionary"]["space"] = False
+        bowser_systems_dictionary["movement_dictionary"]["jump_frame_counter"] = 0
+
+    return bowser_systems_dictionary
+
+def key_Pressed(systems_dictionary, bowser_systems_dictionary):
     mario_object = systems_dictionary["movement_dictionary"]["mario_object"]
-    if keyboard.is_pressed("w") and systems_dictionary["movement_dictionary"]["space"] == False:
+    bowser_object = bowser_systems_dictionary["movement_dictionary"]["bowser_object"]
+    keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_w] and systems_dictionary["movement_dictionary"]["space"] == False:
         systems_dictionary["volume_dictionary"]["sound"] = True
         systems_dictionary["movement_dictionary"]["time_since_last_jumped"] = pygame.time.get_ticks()
         systems_dictionary["movement_dictionary"]["space"] = True
         if systems_dictionary["movement_dictionary"]["move_left"] == True:
-            mario_object.image = pygame.transform.flip(systems_dictionary["misc_dictionary"]["mario_jump_image"], True, False)
+            systems_dictionary["misc_dictionary"]["mario_jump_image"] = pygame.transform.flip(systems_dictionary["misc_dictionary"]["mario_jump_image"], True, False)
         else:
-            mario_object.image = systems_dictionary["misc_dictionary"]["mario_jump_image"]
+            systems_dictionary["misc_dictionary"]["mario_jump_image"] = systems_dictionary["misc_dictionary"]["mario_jump_image"]
+
+    if keys[pygame.K_UP] and bowser_systems_dictionary["movement_dictionary"]["space"] == False:
+        bowser_systems_dictionary["volume_dictionary"]["sound"] = True
+        bowser_systems_dictionary["movement_dictionary"]["time_since_last_jumped"] = pygame.time.get_ticks()
+        bowser_systems_dictionary["movement_dictionary"]["space"] = True
+        if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+            bowser_systems_dictionary["misc_dictionary"]["bowser_jump_image"] = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_jump_image"], True, False)
+        else:
+            bowser_systems_dictionary["misc_dictionary"]["bowser_jump_image"] = bowser_systems_dictionary["misc_dictionary"]["bowser_jump_image"]
             
-    if keyboard.is_pressed("d"):
+    if keys[pygame.K_d]:
         systems_dictionary["movement_dictionary"]["move_right"] = True
 
-    if keyboard.is_pressed("a"):
+    if keys[pygame.K_a]:
         systems_dictionary["movement_dictionary"]["move_left"] = True
+    
+    if keys[pygame.K_RIGHT]:
+        bowser_systems_dictionary["movement_dictionary"]["move_right"] = True
 
-    if keyboard.is_pressed("right arrow"):
-        systems_dictionary["movement_dictionary"]["bowser_move_right"] = True
-        print ("right" + (bowser_systems_dictionary["movement_dictionary"]["bowser_object"].x), str(bowser_systems_dictionary["movement_dictionary"]["bowser_object"].y))
+    if keys[pygame.K_LEFT]:
+        bowser_systems_dictionary["movement_dictionary"]["move_left"] = True
 
-    if keyboard.is_pressed("left arrow"):
-        systems_dictionary["movement_dictionary"]["bowser_move_left"] = True
-        print ("left" + (bowser_systems_dictionary["movement_dictionary"]["bowser_object"].x), str(bowser_systems_dictionary["movement_dictionary"]["bowser_object"].y))
-
-    if keyboard.is_pressed("up arrow") and bowser_systems_dictionary["movement_dictionary"]["space"] == False:
+    if keys[pygame.K_UP] and bowser_systems_dictionary["movement_dictionary"]["space"] == False:
         print ("up")
-
-
-    if event.type == pygame.MOUSEBUTTONDOWN:
-        x,y = pygame.mouse.get_pos()
-        #print ("x is " + str(x))
-        #print ("y is " + str(y))
-
-        #get to game_screen
-        if 650 <= x <= 838 and 150 <= y <= 237 and systems_dictionary["screen_dictionary"]["current_screen"] == systems_dictionary["screen_dictionary"]["main_menu"]:
-            systems_dictionary["screen_dictionary"]["current_screen"] = systems_dictionary["screen_dictionary"]["game_screen"]
-        
-        #get to settings_screen
-        elif 600 <= x <= 918 and 350 <= y <= 437 and systems_dictionary["screen_dictionary"]["current_screen"] == systems_dictionary["screen_dictionary"]["main_menu"]:
-            systems_dictionary["screen_dictionary"]["current_screen"] = systems_dictionary["screen_dictionary"]["settings_screen"]
-
-        #get to control_screen
-        elif 600 <= x <= 922 and 550 <= y <= 636 and systems_dictionary["screen_dictionary"]["current_screen"] == systems_dictionary["screen_dictionary"]["main_menu"]:
-            systems_dictionary["screen_dictionary"]["current_screen"] = systems_dictionary["screen_dictionary"]["control_screen"]
-
-        #return to menu
-        elif ((25 <= x <= 449 and 25 <= y <= 86) and (systems_dictionary["screen_dictionary"]["current_screen"] == systems_dictionary["screen_dictionary"]["game_screen"])
-        or ((25 <= x <= 449 and 25 <= y <= 86) and systems_dictionary["screen_dictionary"]["current_screen"] == systems_dictionary["screen_dictionary"]["settings_screen"])
-        or ((25 <= x <= 449 and 25 <= y <= 86) and systems_dictionary["screen_dictionary"]["current_screen"] == systems_dictionary["screen_dictionary"]["control_screen"])):
-            systems_dictionary["screen_dictionary"]["current_screen"] = systems_dictionary["screen_dictionary"]["main_menu"]
-            systems_dictionary["volume_dictionary"]["volume"] = False
-        
-        #volume button
-        elif 620 <= x <= 915 and 200 <= y <= 284 and systems_dictionary["screen_dictionary"]["current_screen"] == systems_dictionary["screen_dictionary"]["settings_screen"]:
-            systems_dictionary["volume_dictionary"]["volume"] = True
-
-        #higher volume button
-        elif (480 <= x <= 663 and 300 <= y <= 360) and systems_dictionary["screen_dictionary"]["current_screen"] == systems_dictionary["screen_dictionary"]["settings_screen"]:
-            #checks if volume can be changed
-            if systems_dictionary["volume_dictionary"]["volume_percentage"] < 100 and systems_dictionary["volume_dictionary"]["volume_percentage"] >= 0:
-                systems_dictionary["volume_dictionary"]["volume_percentage"] += 5
-                systems_dictionary["volume_dictionary"]["adjust_volume"] += 0.005
-                systems_dictionary["volume_dictionary"]["volume_adjusted"] = True
-
-
-        #lower volume button
-        elif (880 <= x <= 1051 and 300 <= y <= 363) and systems_dictionary["screen_dictionary"]["current_screen"] == systems_dictionary["screen_dictionary"]["settings_screen"]:
-            #checks if volume can be changed
-            if systems_dictionary["volume_dictionary"]["volume_percentage"] > 0 and systems_dictionary["volume_dictionary"]["volume_percentage"] <= 100:
-                systems_dictionary["volume_dictionary"]["volume_percentage"] -= 5
-                systems_dictionary["volume_dictionary"]["adjust_volume"] -= 0.005
-                systems_dictionary["volume_dictionary"]["volume_adjusted"] = True
-
 
     return systems_dictionary, bowser_systems_dictionary

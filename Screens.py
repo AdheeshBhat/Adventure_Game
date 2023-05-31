@@ -10,6 +10,7 @@ mario_background_image = pygame.transform.smoothscale(mario_background_image, (i
 font = pygame.font.Font('Monsterrat.ttf', 70)
 font1 = pygame.font.Font('Monsterrat.ttf', 50)
 mario_jump_sound = pygame.mixer.Sound("mario_jump_sound.mp3")
+bowser_jump_sound = pygame.mixer.Sound("bowser_jump_sound.mp3")
 
 def screens(systems_dictionary, screen, mario_object, bowser_systems_dictionary):
 
@@ -38,14 +39,20 @@ def screens(systems_dictionary, screen, mario_object, bowser_systems_dictionary)
         screen.blit(systems_dictionary["movement_dictionary"]["mario_object"].image, (mario_object.x, mario_object.y))
         screen.blit(bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image, (bowser_systems_dictionary["movement_dictionary"]["bowser_object"].x, bowser_systems_dictionary["movement_dictionary"]["bowser_object"].y))
         
-        #plays jump sound effect
+        #plays mario jump sound effect
         if systems_dictionary["volume_dictionary"]["sound"] == True:
             mario_jump_sound.play()
             systems_dictionary["volume_dictionary"]["sound"] = False
 
+        #plays bowser jump sound effect
+        if bowser_systems_dictionary["volume_dictionary"]["sound"] == True:
+            bowser_jump_sound.play()
+            bowser_systems_dictionary["volume_dictionary"]["sound"] = False
+
         systems_dictionary, mario_object = Mario_Movement.movement(systems_dictionary, mario_object)
         systems_dictionary, bowser_systems_dictionary = Bowser_Movement.bowser_movement(systems_dictionary, bowser_systems_dictionary)
         systems_dictionary = Key_Pressed.mario_jump(systems_dictionary)
+        bowser_systems_dictionary = Key_Pressed.bowser_jump(bowser_systems_dictionary)
 
 
     #settings screen
