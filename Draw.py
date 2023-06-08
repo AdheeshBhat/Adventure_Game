@@ -9,6 +9,34 @@ import Mouse_Pressed
 
 clock = pygame.time.Clock()
 
+def display_next_sprite(screen, sprites, sprite_index):     
+    screen_width, screen_height = screen.get_size()   
+    #Display the current sprite on the screen     
+    current_sprite = sprites[sprite_index]     
+    sprite_rect = current_sprite.get_rect()     
+    sprite_rect.center = (screen_width // 2, screen_height // 2)     
+    screen.blit(current_sprite, sprite_rect)
+
+def load_sprites(sprite_sheet_path, sprite_width, sprite_height):
+    sprite_sheet = sprite_sheet_path
+    sprite_list = []
+    image_counter_x= 0
+    image_counter_y = 0
+
+    sheet_width, sheet_height = sprite_sheet.get_size()
+    for y in range(0, sheet_height, sprite_height):
+        image_counter_y += 1
+        image_counter_x = 0
+        for x in range(0, sheet_width, sprite_width):
+            image_counter_x += 1
+            sprite_rect = pygame.Rect(x, y, sprite_width, sprite_height)             
+            sprite = pygame.Surface(sprite_rect.size, pygame.SRCALPHA)             
+            sprite.blit(sprite_sheet, (x*sprite_width, y*sprite_height), sprite_rect)
+            sprite_list.append(sprite)
+    print (len(sprite_list))
+    print (image_counter_x, image_counter_y)
+    return sprite_list
+
 #Setup
 adjust_volume = 0.1
 volume_adjusted = False
@@ -129,11 +157,20 @@ bowser_systems_dictionary = {"movement_dictionary": {"bowser_object": bowser_obj
                                             "bowser_walking12": bowser_walking12, "bowser_walking13": bowser_walking13,
                                             "bowser_walking14": bowser_walking14, "bowser_walking15": bowser_walking15,
                                             "bowser_walking16": bowser_walking16, "bowser_jump_image": bowser_jump_image}}
+mario_sprite_sheet = pygame.image.load("mario_sprite_sheet.png")
+mario_sprite_sheet = pygame.transform.smoothscale(mario_sprite_sheet, (3500, 5500))
+sprite_width = 250
+sprite_height = 250
+sprite_list = load_sprites(mario_sprite_sheet, sprite_width, sprite_height)
+total_sprites = 0
 
+screen.fill((255,255,255))
 while running:
     clock.tick(60)
-
     current_time = pygame.time.get_ticks()
+
+    display_next_sprite(screen, sprite_list, total_sprites)
+    total_sprites = (total_sprites + 1) % (len(sprite_list))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -141,8 +178,8 @@ while running:
         else:
             systems_dictionary = Mouse_Pressed.mouse_pressed(event, systems_dictionary)
 
-    systems_dictionary, bowser_systems_dictionary = Key_Pressed.key_Pressed(systems_dictionary, bowser_systems_dictionary)
+    #systems_dictionary, bowser_systems_dictionary = Key_Pressed.key_Pressed(systems_dictionary, bowser_systems_dictionary)
 
-    systems_dictionary, screen, mario_object, bowser_systems_dictionary = Screens.screens(systems_dictionary, screen, mario_object, bowser_systems_dictionary)
+    #systems_dictionary, screen, mario_object, bowser_systems_dictionary = Screens.screens(systems_dictionary, screen, mario_object, bowser_systems_dictionary)
 
     pygame.display.flip()
