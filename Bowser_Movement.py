@@ -1,18 +1,19 @@
 import pygame
 pygame.init()
 
-def bowser_movement(systems_dictionary, bowser_systems_dictionary):
+def bowser_movement (bowser_systems_dictionary):
 
     image_swap = bowser_systems_dictionary["movement_dictionary"]["image_swap"]
     move_right = bowser_systems_dictionary["movement_dictionary"]["move_right"]
     move_left = bowser_systems_dictionary["movement_dictionary"]["move_left"]
     
     #1
-    if move_right == True or move_left == True:
+    if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True or bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
         #check if it has been three frames yet
         if bowser_systems_dictionary["movement_dictionary"]["frame_counter"] == 3 and image_swap == 0:
             #while moving right:
-            if move_right == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = True
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
@@ -24,7 +25,8 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["move_right"] = False
             
             #while moving left
-            if move_left == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = False
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
@@ -34,12 +36,21 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["image_swap"] = 1
                 bowser_systems_dictionary["movement_dictionary"]["move_left"] = False
+    else:
+        #True = facing right
+        if bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] == True and not bowser_systems_dictionary["movement_dictionary"]["space"]:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        #False = facing left
+        else:
+            if not bowser_systems_dictionary["movement_dictionary"]["space"]:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
 
     #2
-    if move_right == True or move_left == True:
+    if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True or bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
         if bowser_systems_dictionary["movement_dictionary"]["frame_counter"] == 3 and image_swap == 1:
             #while moving right
-            if move_right == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = True
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking2"]
@@ -51,7 +62,8 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["move_right"] = False
 
             #while moving left
-            if move_left == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = False
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking2"], True, False)
@@ -62,12 +74,21 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["image_swap"] = 2
                 bowser_systems_dictionary["movement_dictionary"]["move_left"] = False
+    else:
+        #True = facing right
+        if bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] == True and not bowser_systems_dictionary["movement_dictionary"]["space"]:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        #False = facing left
+        else:
+            if not bowser_systems_dictionary["movement_dictionary"]["space"]:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
 
     #3
-    if move_right == True or move_left == True:
+    if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True or bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
         if bowser_systems_dictionary["movement_dictionary"]["frame_counter"] == 3 and image_swap == 2:
             #while moving right
-            if move_right == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = True
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking3"]
@@ -79,7 +100,8 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["move_right"] = False
 
             #while moving left
-            if move_left == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = False
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking3"], True, False)
@@ -90,12 +112,21 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["image_swap"] = 3
                 bowser_systems_dictionary["movement_dictionary"]["move_left"] = False
+    else:
+        #True = facing right
+        if bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] == True and not bowser_systems_dictionary["movement_dictionary"]["space"]:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        #False = facing left
+        else:
+            if not bowser_systems_dictionary["movement_dictionary"]["space"]:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
         
     #4
-    if move_right == True or move_left == True:
+    if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True or bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
         if bowser_systems_dictionary["movement_dictionary"]["frame_counter"] == 3 and image_swap == 3:
             #while moving right
-            if move_right == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = True
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking4"]
@@ -107,7 +138,8 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["move_right"] = False
 
             #while moving left
-            if move_left == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = False
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking4"], True, False)
@@ -118,12 +150,21 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["image_swap"] = 4
                 bowser_systems_dictionary["movement_dictionary"]["move_left"] = False
+    else:
+        #True = facing right
+        if bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] == True and not bowser_systems_dictionary["movement_dictionary"]["space"]:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        #False = facing left
+        else:
+            if not bowser_systems_dictionary["movement_dictionary"]["space"]:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
         
     #5
-    if move_right == True or move_left == True:
+    if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True or bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
         if bowser_systems_dictionary["movement_dictionary"]["frame_counter"] == 3 and image_swap == 4:
             #while moving right
-            if move_right == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = True
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking5"]
@@ -135,7 +176,8 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["move_right"] = False
 
             #while moving left
-            if move_left == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = False
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking5"], True, False)
@@ -146,12 +188,21 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["image_swap"] = 5
                 bowser_systems_dictionary["movement_dictionary"]["move_left"] = False
+    else:
+        #True = facing right
+        if bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] == True and not bowser_systems_dictionary["movement_dictionary"]["space"]:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        #False = facing left
+        else:
+            if not bowser_systems_dictionary["movement_dictionary"]["space"]:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
         
     #6
-    if move_right == True or move_left == True:
+    if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True or bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
         if bowser_systems_dictionary["movement_dictionary"]["frame_counter"] == 3 and image_swap == 5:
             #while moving right
-            if move_right == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = True
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking6"]
@@ -163,7 +214,8 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["move_right"] = False
 
             #while moving left
-            if move_left == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = False
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking6"], True, False)
@@ -174,12 +226,21 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["image_swap"] = 6
                 bowser_systems_dictionary["movement_dictionary"]["move_left"] = False
+    else:
+        #True = facing right
+        if bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] == True and not bowser_systems_dictionary["movement_dictionary"]["space"]:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        #False = facing left
+        else:
+            if not bowser_systems_dictionary["movement_dictionary"]["space"]:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
 
     #7
-    if move_right == True or move_left == True:
+    if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True or bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
         if bowser_systems_dictionary["movement_dictionary"]["frame_counter"] == 3 and image_swap == 6:
             #while moving right
-            if move_right == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = True
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking7"]
@@ -191,7 +252,8 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["move_right"] = False
 
             #while moving left
-            if move_left == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = False
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking7"], True, False)
@@ -202,12 +264,21 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["image_swap"] = 7
                 bowser_systems_dictionary["movement_dictionary"]["move_left"] = False
+    else:
+        #True = facing right
+        if bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] == True and not bowser_systems_dictionary["movement_dictionary"]["space"]:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        #False = facing left
+        else:
+            if not bowser_systems_dictionary["movement_dictionary"]["space"]:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
     
     #8
-    if move_right == True or move_left == True:
+    if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True or bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
         if bowser_systems_dictionary["movement_dictionary"]["frame_counter"] == 3 and image_swap == 7:
             #while moving right
-            if move_right == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = True
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking8"]
@@ -219,7 +290,8 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["move_right"] = False
 
             #while moving left
-            if move_left == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = False
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking8"], True, False)
@@ -230,12 +302,21 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["image_swap"] = 8
                 bowser_systems_dictionary["movement_dictionary"]["move_left"] = False
+    else:
+        #True = facing right
+        if bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] == True and not bowser_systems_dictionary["movement_dictionary"]["space"]:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        #False = facing left
+        else:
+            if not bowser_systems_dictionary["movement_dictionary"]["space"]:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
     
     #9
-    if move_right == True or move_left == True:
+    if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True or bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
         if bowser_systems_dictionary["movement_dictionary"]["frame_counter"] == 3 and image_swap == 8:
             #while moving right
-            if move_right == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = True
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking9"]
@@ -247,7 +328,8 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["move_right"] = False
 
             #while moving left
-            if move_left == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = False
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking9"], True, False)
@@ -258,12 +340,21 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["image_swap"] = 9
                 bowser_systems_dictionary["movement_dictionary"]["move_left"] = False
+    else:
+        #True = facing right
+        if bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] == True and not bowser_systems_dictionary["movement_dictionary"]["space"]:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        #False = facing left
+        else:
+            if not bowser_systems_dictionary["movement_dictionary"]["space"]:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
 
     #10
-    if move_right == True or move_left == True:
+    if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True or bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
         if bowser_systems_dictionary["movement_dictionary"]["frame_counter"] == 3 and image_swap == 9:
             #while moving right
-            if move_right == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = True
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking10"]
@@ -275,7 +366,8 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["move_right"] = False
 
             #while moving left
-            if move_left == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = False
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking10"], True, False)
@@ -286,12 +378,21 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["image_swap"] = 10
                 bowser_systems_dictionary["movement_dictionary"]["move_left"] = False
+    else:
+        #True = facing right
+        if bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] == True and not bowser_systems_dictionary["movement_dictionary"]["space"]:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        #False = facing left
+        else:
+            if not bowser_systems_dictionary["movement_dictionary"]["space"]:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
 
     #11
-    if move_right == True or move_left == True:
+    if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True or bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
         if bowser_systems_dictionary["movement_dictionary"]["frame_counter"] == 3 and image_swap == 10:
             #while moving right
-            if move_right == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = True
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking11"]
@@ -303,7 +404,8 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["move_right"] = False
 
             #while moving left
-            if move_left == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = False
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking11"], True, False)
@@ -314,12 +416,21 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["image_swap"] = 11
                 bowser_systems_dictionary["movement_dictionary"]["move_left"] = False
+    else:
+        #True = facing right
+        if bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] == True and not bowser_systems_dictionary["movement_dictionary"]["space"]:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        #False = facing left
+        else:
+            if not bowser_systems_dictionary["movement_dictionary"]["space"]:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
 
     #12
-    if move_right == True or move_left == True:
+    if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True or bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
         if bowser_systems_dictionary["movement_dictionary"]["frame_counter"] == 3 and image_swap == 11:
             #while moving right
-            if move_right == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = True
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking12"]
@@ -331,7 +442,8 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["move_right"] = False
 
             #while moving left
-            if move_left == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = False
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking12"], True, False)
@@ -342,12 +454,21 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["image_swap"] = 12
                 bowser_systems_dictionary["movement_dictionary"]["move_left"] = False
+    else:
+        #True = facing right
+        if bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] == True and not bowser_systems_dictionary["movement_dictionary"]["space"]:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        #False = facing left
+        else:
+            if not bowser_systems_dictionary["movement_dictionary"]["space"]:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
 
     #13
-    if move_right == True or move_left == True:
+    if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True or bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
         if bowser_systems_dictionary["movement_dictionary"]["frame_counter"] == 3 and image_swap == 12:
             #while moving right
-            if move_right == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = True
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking13"]
@@ -359,7 +480,8 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["move_right"] = False
 
             #while moving left
-            if move_left == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = False
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking13"], True, False)
@@ -370,12 +492,21 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["image_swap"] = 13
                 bowser_systems_dictionary["movement_dictionary"]["move_left"] = False
+    else:
+        #True = facing right
+        if bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] == True and not bowser_systems_dictionary["movement_dictionary"]["space"]:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        #False = facing left
+        else:
+            if not bowser_systems_dictionary["movement_dictionary"]["space"]:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
 
     #14
-    if move_right == True or move_left == True:
+    if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True or bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
         if bowser_systems_dictionary["movement_dictionary"]["frame_counter"] == 3 and image_swap == 13:
             #while moving right
-            if move_right == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = True
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking14"]
@@ -387,7 +518,8 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["move_right"] = False
 
             #while moving left
-            if move_left == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = False
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking14"], True, False)
@@ -398,12 +530,21 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["image_swap"] = 14
                 bowser_systems_dictionary["movement_dictionary"]["move_left"] = False
+    else:
+        #True = facing right
+        if bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] == True and not bowser_systems_dictionary["movement_dictionary"]["space"]:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        #False = facing left
+        else:
+            if not bowser_systems_dictionary["movement_dictionary"]["space"]:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
 
     #15
-    if move_right == True or move_left == True:
+    if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True or bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
         if bowser_systems_dictionary["movement_dictionary"]["frame_counter"] == 3 and image_swap == 14:
             #while moving right
-            if move_right == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = True
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking15"]
@@ -415,7 +556,8 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["move_right"] = False
 
             #while moving left
-            if move_left == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = False
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking15"], True, False)
@@ -426,12 +568,21 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["image_swap"] = 15
                 bowser_systems_dictionary["movement_dictionary"]["move_left"] = False
+    else:
+        #True = facing right
+        if bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] == True and not bowser_systems_dictionary["movement_dictionary"]["space"]:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        #False = facing left
+        else:
+            if not bowser_systems_dictionary["movement_dictionary"]["space"]:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
 
     #16
-    if move_right == True or move_left == True:
+    if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True or bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
         if bowser_systems_dictionary["movement_dictionary"]["frame_counter"] == 3 and image_swap == 15:
             #while moving right
-            if move_right == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_right"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = True
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking16"]
@@ -443,7 +594,8 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["move_right"] = False
 
             #while moving left
-            if move_left == True:
+            if bowser_systems_dictionary["movement_dictionary"]["move_left"] == True:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] = False
                 #checks if character is jumping in order to prevent an image switch
                 if not bowser_systems_dictionary["movement_dictionary"]["space"]:
                     bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking16"], True, False)
@@ -454,6 +606,14 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
                 bowser_systems_dictionary["movement_dictionary"]["frame_counter"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["image_swap"] = 0
                 bowser_systems_dictionary["movement_dictionary"]["move_left"] = False
+    else:
+        #True = facing right
+        if bowser_systems_dictionary["movement_dictionary"]["bowser_direction"] == True and not bowser_systems_dictionary["movement_dictionary"]["space"]:
+            bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"]
+        #False = facing left
+        else:
+            if not bowser_systems_dictionary["movement_dictionary"]["space"]:
+                bowser_systems_dictionary["movement_dictionary"]["bowser_object"].image = pygame.transform.flip(bowser_systems_dictionary["misc_dictionary"]["bowser_walking1"], True, False)
 
 
 
@@ -468,4 +628,4 @@ def bowser_movement(systems_dictionary, bowser_systems_dictionary):
 
 
 
-    return systems_dictionary, bowser_systems_dictionary
+    return bowser_systems_dictionary

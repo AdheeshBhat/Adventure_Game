@@ -41,16 +41,16 @@ def screens(systems_dictionary, screen, mario_object, bowser_systems_dictionary)
         
         #plays mario jump sound effect
         if systems_dictionary["volume_dictionary"]["sound"] == True:
-            mario_jump_sound.play()
+            #mario_jump_sound.play()
             systems_dictionary["volume_dictionary"]["sound"] = False
 
         #plays bowser jump sound effect
         if bowser_systems_dictionary["volume_dictionary"]["sound"] == True:
-            bowser_jump_sound.play()
+            #bowser_jump_sound.play()
             bowser_systems_dictionary["volume_dictionary"]["sound"] = False
 
-        systems_dictionary, mario_object = Mario_Movement.movement(systems_dictionary, mario_object)
-        systems_dictionary, bowser_systems_dictionary = Bowser_Movement.bowser_movement(systems_dictionary, bowser_systems_dictionary)
+        systems_dictionary = Mario_Movement.movement(systems_dictionary)
+        bowser_systems_dictionary = Bowser_Movement.bowser_movement(bowser_systems_dictionary)
         systems_dictionary = Key_Pressed.mario_jump(systems_dictionary)
         bowser_systems_dictionary = Key_Pressed.bowser_jump(bowser_systems_dictionary)
 
