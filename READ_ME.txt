@@ -16,3 +16,8 @@ https://www.spriters-resource.com/fullview/22866/ - full mario sprite sheet (wit
 https://www.spriters-resource.com/fullview/24283/ - full Link sprite sheet (resized 3/4 of mario measurements)
 
 Frame counter ensures that each image is shown for 3 frames so that the animation is not too fast.
+
+1. get all link attack images
+2. 
+3.
+4.

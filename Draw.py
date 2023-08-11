@@ -6,6 +6,7 @@ pygame.init()
 pygame.mixer.init()
 import Screens
 import Mouse_Pressed
+#change all "marios" to link
 
 clock = pygame.time.Clock()
 
@@ -17,7 +18,7 @@ screen = pygame.display.set_mode((info_object.current_w - 5, info_object.current
 mario_walking1 = pygame.image.load("mario_walking_image1.png")
 mario_walking1 = pygame.transform.smoothscale(mario_walking1, (150,150))
 mario_walking2 = pygame.image.load("mario_walking_image2.png")
-mario_walking2 = pygame.transform.smoothscale(mario_walking2, (150,150))
+mario_walking2 = pygame.transform.smoothscale(mario_walking2, (150,250))
 mario_walking3 = pygame.image.load("mario_walking_image3.png")
 mario_walking3 = pygame.transform.smoothscale(mario_walking3, (150,150))
 mario_walking4 = pygame.image.load("mario_walking_image4.png")
@@ -35,6 +36,24 @@ mario_walking9 = pygame.transform.smoothscale(mario_walking9, (150,150))
 mario_walking10 = pygame.image.load("mario_walking_image10.png")
 mario_walking10 = pygame.transform.smoothscale(mario_walking10, (150,150))
 
+link_pull_sword1 = pygame.image.load("link_pull_sword1.png")
+link_pull_sword1 = pygame.transform.smoothscale(link_pull_sword1, (150,150))
+link_pull_sword2 = pygame.image.load("link_pull_sword2.png")
+link_pull_sword2 = pygame.transform.smoothscale(link_pull_sword2, (150,150))
+link_attack1 = pygame.image.load("link_attack1.png")
+link_attack1 = pygame.transform.smoothscale(link_attack1, (250,250))
+link_attack2 = pygame.image.load("link_attack2.png")
+link_attack2 = pygame.transform.smoothscale(link_attack2, (250,250))
+link_attack3 = pygame.image.load("link_attack3.png")
+link_attack3 = pygame.transform.smoothscale(link_attack3, (250,250))
+link_attack4 = pygame.image.load("link_attack4.png")
+link_attack4 = pygame.transform.smoothscale(link_attack4, (250,250))
+link_attack5 = pygame.image.load("link_attack5.png")
+link_attack5 = pygame.transform.smoothscale(link_attack5, (250,250))
+link_attack6 = pygame.image.load("link_attack6.png")
+link_attack6 = pygame.transform.smoothscale(link_attack6, (250,250))
+link_attack7 = pygame.image.load("link_attack7.png")
+link_attack7 = pygame.transform.smoothscale(link_attack7, (250,250))
 
 mario_jump_image = pygame.image.load("mario_jump_image.png")
 mario_jump_image = pygame.transform.smoothscale(mario_jump_image, (150,150))
@@ -84,9 +103,9 @@ class mario:
         self.x = 50
         self.y = 510
         self.top = 510
-        self.bottom = self.y + 200
+        self.bottom = self.y + 150
         self.left = 50
-        self.right = self.x + 200 
+        self.right = self.x + 150
         self.image = mario_walking1
 
 class bowser:
@@ -98,6 +117,17 @@ class bowser:
         self.left = 900
         self.right = self.x + 200
         self.image = bowser_walking1
+
+class link_attacks:
+    def __init__(self):
+        self.x = 50
+        self.y = 550
+        self.top = 550
+        self.bottom = self.y + 250
+        self.left = 50
+        self.right = self.right + 250
+        self.image = link_pull_sword1
+        
 
 #initializes game variables
 running = True
